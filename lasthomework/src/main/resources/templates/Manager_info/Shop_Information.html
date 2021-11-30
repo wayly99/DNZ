@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:itemStat="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>修改门店信息</title>
+    <style>
+        body{
+            background-color: #f4f5f6;
+        }
+        .tableDiv{
+            width: 800px;
+            height: 600px;
+            background-color:#FFFFFF;
+            border-radius: 15%;
+        }
+        .list{
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+<div style="height: 40px"></div>
+<center>
+    <div class="tableDiv">
+        <div style="height: 40px"></div>
+        <a th:href="@{Manager_login(manager_id = ${manager.manager_id},manager_pwd = ${manager.manager_password})}"><button>返回主菜单</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a th:href="@{show_shop(shop_id = ${shop_info.shop_id})}"><button>查看订单</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a th:href="@{show_food(shop_id = ${shop_info.shop_id})}"><button>查看仓库</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a th:href="@{edit_shopInformation(shop_id = ${shop_info.shop_id})}"><button>修改门店信息</button></a>
+        <form action="edit_shop_information" method="get">
+            <div style="height: 30px"></div>
+            <input type="hidden" th:value="${shop_info.shop_id}" name="shop_id">
+            <div style="height: 30px"></div>
+            <h2>修改门店信息</h2>
+            <div class="list">门店名字：<input type="text" th:value="${shop_info.shop_name}" name="shop_name"></div>
+
+            <div class="list">门店地址：<input type="text" th:value="${shop_info.location}" name="location"></div>
+
+            <input type="submit" value="修改">
+        </form>
+    </div>
+</center>
+</body>
+</html>

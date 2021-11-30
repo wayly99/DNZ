@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lastHomeWork.mapper.UserMapper">
+    <select id="checkLogin" resultType="com.example.lastHomeWork.entity.User_Info">
+        select user_name,vip_id from use_info
+        where user_id = #{user_id} and password = #{password}
+    </select>
+    <select id="FoundAllShop_Info" resultType="com.example.lastHomeWork.entity.Shop_Info">
+        select shop_id,shop_name,location from shop
+    </select>
+    <select id="getVip_InfoByVip_id" resultType="com.example.lastHomeWork.entity.Vip_Info">
+        select * from vip
+        where vipid = ${id}
+    </select>
+    <select id="getFoodByID" resultType="com.example.lastHomeWork.entity.Food_Info">
+        select * from food
+        where food_id = ${food_id}
+    </select>
+    <select id="SelectAllFood" resultType="com.example.lastHomeWork.entity.Food_Info">
+        select * from food
+        where shop_id = ${shop_id}
+        limit ${start_page}, 5
+    </select>
+    <select id="getAllFoodByShop_id" resultType="com.example.lastHomeWork.entity.Food_Info">
+        select * from  food
+        where shop_id = ${shop_id}
+    </select>
+    <select id="getShop_Cart" resultType="com.example.lastHomeWork.entity.shop_Cart">
+        select user_id,food_id,buy_number,shop_id from shop_cart
+        where user_id = ${user_id}
+    </select>
+    <select id="getShop_CartAndPicture" resultType="com.example.lastHomeWork.entity.shop_Cart">
+        select s.food_id,buy_number,food_name,pictureUrl,price from shop_cart s
+        join food on s.food_id = food.food_id
+        where user_id = ${user_id}
+    </select>
+    <select id="selectOrderID" resultType="int" parameterType="com.example.lastHomeWork.entity.order_info">
+        select  order_id from order_info
+        where user_id = #{user_id} and shop_id = #{shop_id}
+        and total = #{total} and payment = #{payment}
+        limit 1
+    </select>
+    <select id="selectVipByUser_id" parameterType="com.example.lastHomeWork.entity.Vip_Info" resultType="int">
+        select vipID from vip
+        where user_id = ${user_id}
+    </select>
+    <insert id="InsertShop_cart" parameterType="com.example.lastHomeWork.entity.shop_Cart">
+        insert into shop_cart
+        values (${user_id},${food_id},${shop_id},${buy_number})
+    </insert>
+    <insert id="InsertUser" parameterType="com.example.lastHomeWork.entity.User_Info">
+        insert into use_info(user_id,user_name,password)
+        values (${id},'${user_name}','${password}',${vip_id});
+    </insert>
+    <insert id="InsertVip">
+        insert into vip(account,integral,user_id)
+        values (0,0,${user_id})
+    </insert>
+    <insert id="InsertOrder" parameterType="com.example.lastHomeWork.entity.order_info">
+        insert into order_info(user_id,shop_id,total,payment)
+        values (#{user_id},#{shop_id},#{total},#{payment})
+    </insert>
+    <insert id="InsertFoodOrder" parameterType="com.example.lastHomeWork.entity.Food_Order">
+        insert into food_order
+        values (#{order_id},#{food_id},#{food_number})
+    </insert>
+    <update id="updateVip" parameterType="com.example.lastHomeWork.entity.Vip_Info">
+        update vip
+        set account = #{account} , integral = #{integral}
+        where VIPID = #{VipID}
+    </update>
+    <update id="updateFood" parameterType="com.example.lastHomeWork.entity.Food_Info">
+        update food
+        set food_number = #{food_number}
+        where food_id = #{food_id}
+    </update>
+    <update id="updateShop_cart" parameterType="com.example.lastHomeWork.entity.shop_Cart">
+        update shop_cart
+        set buy_number = ${buy_number}
+        where user_id = ${user_id} and food_id = ${food_id}
+    </update>
+    <delete id="deleteShop_cart" parameterType="com.example.lastHomeWork.entity.shop_Cart">
+        delete from shop_cart
+        where user_id = ${user_id} and food_id = ${food_id}
+    </delete>
+    <delete id="clearShop_cart" parameterType="com.example.lastHomeWork.entity.shop_Cart">
+        delete from shop_cart
+        where user_id = ${user_id}
+    </delete>
+</mapper>

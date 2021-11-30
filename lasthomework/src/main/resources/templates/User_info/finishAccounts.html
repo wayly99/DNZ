@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:itemStat="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>完成支付</title>
+    <style>
+        body{
+            background-color: #f4f5f6;
+        }
+        .tableDiv{
+            width: 800px;
+            height: 600px;
+            background-color:#FFFFFF;
+        }
+        .comeback{
+            width: 100px;
+            height: 40px;
+            border-radius: 20%;
+            background-color: cornflowerblue;
+            font-family: "微软雅黑 Light";
+            font-size: 20px;
+            font-weight: bold ;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <div style="height: 40px"></div>
+    <div class="tableDiv">
+        <div style="height: 40px"></div>
+        <h2>完成支付</h2>
+        <a th:href="@{User_login(user_id = ${user_info.user_id},user_pwd = ${user_info.password})}"><div class="comeback">返回首页</div></a>
+    </div>
+</center>
+</body>
+</html>

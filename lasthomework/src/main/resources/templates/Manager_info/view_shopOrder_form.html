@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:itemStat="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>查看订单</title>
+    <style>
+        body{
+            background-color: #f4f5f6;
+        }
+        a:link {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:active {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #000000;
+        }
+        .tableDiv{
+            width: 800px;
+            height: 100%;
+            background-color:#FFFFFF;
+        }
+        .list1{
+            width: 150px;
+            font-size: 20px;
+            font-family: "微软雅黑 Light";
+            padding-bottom: 5%;
+            font-weight: bold;
+        }
+        .list2{
+            width: 150px;
+            font-size: 15px;
+            height: 50px;
+            font-family: "微软雅黑 Light";
+            padding-bottom: 5%;
+        }
+        .list3{
+            height: 30px;
+            font-size: 25px;
+            font-family: "微软雅黑 Light";
+            padding-bottom: 5%;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div style="height: 40px;"></div>
+<center>
+    <div class="tableDiv">
+        <div style="height: 20px"></div>
+        <div class="list3" th:text="${shop_info.shop_name}"></div>
+        <div class="list3" th:text="'地址：'+${shop_info.location}"></div>
+        <a th:href="@{Manager_login(manager_id = ${manager.manager_id},manager_pwd = ${manager.manager_password})}"><button>返回主菜单</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a th:href="@{show_shop(shop_id = ${shop_info.shop_id})}"><button>查看订单</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a th:href="@{show_food(shop_id = ${shop_info.shop_id})}"><button>查看仓库</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a th:href="@{edit_shopInformation(shop_id = ${shop_info.shop_id})}"><button>修改门店信息</button></a>
+        <p></p>
+        <table>
+            <tr>
+                <th>
+                    <div class="list1">订单号</div>
+                </th>
+                <th>
+                    <div class="list1">购买者</div>
+                </th>
+                <th>
+                    <div class="list1">总金额</div>
+                </th>
+                <th colspan="2">
+                    <div class="list1">支付方式</div>
+                </th>
+
+            </tr>
+            <div th:each="item, itemStat: ${order_infos}">
+                <tr>
+                    <th>
+                        <div class="list2" th:text="${item.order_id}"></div>
+                    </th>
+                    <th>
+                        <div class="list2" th:text="${item.user_name}"></div>
+                    </th>
+                    <th>
+                        <div class="list2" th:text="${item.total}"></div>
+                    </th>
+                    <th>
+                        <div class="list2" th:text="${item.payment}"></div>
+                    </th>
+                    <th>
+                        <a th:href="@{showFood_Order(order_id = ${item.order_id},
+                        shop_id = ${shop_info.shop_id},user_name = ${item.user_name})}"><div class="list2">查看订单详情</div></a>
+                    </th>
+                </tr>
+            </div>
+        </table>
+    </div>
+</center>
+</body>
+</html>

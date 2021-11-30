@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:itemStat="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: #f4f5f6;
+        }
+        a:link {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:active {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #000000;
+        }
+        .bg {
+
+            height: 80%;
+            padding-bottom: 5%;
+            align-self: center;
+        }
+        .head{
+            text-align: center;
+            padding-bottom: 5%;
+        }
+        .name{
+            text-align: center;
+            font-size:30px;
+        }
+        .vip{
+            text-align: center;
+            color: cornflowerblue;
+            font-size:25px;
+        }
+        .headFront{
+            text-align: center;
+            color: cornflowerblue;
+            font-size:20px;
+        }
+        .list{
+            width: 200px;
+            height: 50px;
+        }
+        .listButtonFont{
+            width: 200px;
+            height: 50px;
+            font-family: "微软雅黑 Light";
+        }
+        .tableDiv{
+            width: 800px;
+            height: 300px;
+            background-color:#FFFFFF;
+            border-radius: 20%;
+        }
+        .title{
+            font-size: 20px;
+            height: 55px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class="head">
+            <div class="name">欢迎回来，<label  th:text="${user_info.user_name}"></label></div>
+            <div class="vip"><label th:text="'VipID:'+${user_info.vipID}"></label></div>
+            <div class="headFront">
+                <label th:text="'余额:'+${vip_info.account}"></label>
+                <label th:text="'积分:'+${vip_info.integral}"></label>
+            </div>
+        </div>
+        <center>
+        <div class="tableDiv">
+        <table>
+
+            <tr class="title">
+                <th>
+                    <b>门店编号</b>
+                </th>
+                <th>
+                    <b>门店名字</b>
+                </th>
+                <th>
+                    <b>门店地址</b>
+                </th>
+                <th>
+                    <b>选择该门店</b>
+                </th>
+            </tr>
+        <div th:each="item, itemStat: ${shop_infoList}">
+            <tr>
+                <th>
+                    <div class="list" th:text="${item.shop_id}"></div>
+                </th>
+                <th>
+                    <div class="list" th:text="${item.shop_name}"></div>
+                </th>
+                <th>
+                    <div class="list" th:text="${item.location}"></div>
+                </th>
+                <th>
+                    <a th:href="@{showFood(shop_id = ${item.shop_id},
+                    start_page = 0)}"><div class="listButtonFont">选择该门店</div></a>
+                </th>
+            </tr>
+        </div>
+
+        </table>
+        </div>
+        </center>
+    </div>
+</body>
+</html>

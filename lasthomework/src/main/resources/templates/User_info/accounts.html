@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:itemStat="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>结账页面</title>
+    <style>
+        body{
+            background-color: #f4f5f6;
+        }
+        a:link {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:active {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #000000;
+        }
+        .list1{
+            width: 150px;
+            font-size: 20px;
+            height: 50px;
+            font-family: "微软雅黑 Light";
+            padding-bottom: 5%;
+        }
+        .list2{
+            width: 150px;
+            font-size: 15px;
+            height: 50px;
+            font-family: "微软雅黑 Light";
+            padding-bottom: 5%;
+        }
+        .list3{
+            width: 100px;
+            height: 50px;
+            padding-bottom: 5%;
+        }
+        .tableDiv{
+            width: 800px;
+            height: 100%;
+            background-color:#FFFFFF;
+        }
+        .cashBuy_button{
+            width: 110px;
+            height: 30px;
+            border-radius: 20%;
+            background-color: cornflowerblue;
+            font-family: "微软雅黑 Light";
+            font-size: 20px;
+            font-weight: bold ;
+        }
+        .addImg{
+            width: 25px;
+            height:25px;
+        }
+        .account{
+            text-align: center;
+            color: black;
+            font-size:15px;
+            font-family: "微软雅黑 Light";
+        }
+        .price{
+            font-weight: bold;
+            font-family: "微软雅黑 Light";
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <div style="height: 40px"></div>
+    <div class="tableDiv">
+        <div style="height: 40px"></div>
+        <a th:href="@{showFood(shop_id = ${shop_id},start_page = ${start_page})}">
+            <button style="float: left">返回</button></a>
+        <table>
+            <tr>
+                <th>
+                    <div class="list1">食物名</div>
+                </th>
+                <th>
+                    <div class="list1">食物剩余数量</div>
+                </th>
+                <th colspan="2">
+                    <div class="list1">价格</div>
+                </th>
+            </tr>
+            <div th:each="item, itemStat: ${food_infoList}">
+                <tr>
+                    <th>
+                        <div class="list2" th:text="${item.food_name}"></div>
+                    </th>
+                    <th>
+                        <div class="list2" th:text="${item.food_number}"></div>
+                    </th>
+                    <th>
+                        <div class="list2" th:text="${item.price}"></div>
+                    </th>
+                    <th>
+                        <div class="list3"><a th:href="@{decreaseFood(food_id = ${item.food_id})}"><img src="http://127.0.0.1:8080/decrease.png" class="addImg"></a>
+                            &nbsp;<label th:text="${item.buy_number}"></label></div>
+                    </th>
+                </tr>
+            </div>
+
+        </table>
+        <div th:text="'总金额为： '+${counts}" class="price"></div>
+
+        <a th:href="@{show_cash(counts = ${counts},shop_id = ${shop_id})}"><div class="cashBuy_button">现金购买</div></a>
+        <div style="height: 50px;"></div>
+        <div>
+                <div th:text="'你含有的余额:'+${vip_info.account}" class="account"></div>
+                <div th:text="'你含有的积分:'+${vip_info.integral}" class="account">(每100积分可作为1元钱使用)</div>
+        </div>
+        <div><a th:href="@{vip_accounts(counts = ${counts},vip_id = ${vip_info.vipID},shop_id = ${shop_id})}"><div class="cashBuy_button">会员购买</div></a></div>
+    </div>
+</center>
+</body>
+</html>

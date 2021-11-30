@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lastHomeWork.mapper.ManagerMapper">
+    <select id="getAManager" resultType="com.example.lastHomeWork.entity.Manager">
+        select * from manager
+        where manager_id = ${manager_id} and manager_password = ${manager_password}
+    </select>
+    <select id="selectAllManager" resultType="com.example.lastHomeWork.entity.Manager">
+        select Manager_id,Manager_name from manager;
+    </select>
+    <select id="selectManagerByID" resultType="com.example.lastHomeWork.entity.Manager">
+        select Manager_name,manager_privilege from manager
+        where manager_id = #{manager_id}
+    </select>
+    <select id="getPrivilegeByManager_privilege" resultType="com.example.lastHomeWork.entity.Privilege_Info">
+        select privilege_name,privilege_request from privilege_info
+        where privilege_id = ${privilege_id}
+    </select>
+    <select id="getOrder_info" resultType="com.example.lastHomeWork.entity.order_info">
+        select order_id,user_name,total,payment from order_info o join use_info u
+        on o.user_id = u.user_id
+        where shop_id = ${shop_id}
+    </select>
+    <select id="getOrder_infoByUser_id" resultType="com.example.lastHomeWork.entity.order_info">
+        select order_id,shop_name,total,payment from order_info o join shop s
+        on o.shop_id = s.shop_id
+        where user_id = ${user_id}
+    </select>
+    <select id="getFoodOrder" resultType="com.example.lastHomeWork.entity.Food_Order">
+        select food_name,fo.food_number,price from food_order fo join food f on fo.food_id = f.food_id
+        where order_id = ${order_id}
+    </select>
+    <select id="getFoodShop_cart" resultType="com.example.lastHomeWork.entity.Food_Info">
+    select food_name,price,buy_number from food_order fo join food f on fo.food_id = f.food_id
+	JOIN shop_cart s on fo.food_id=s.food_id
+	where order_id = ${order_id}
+    </select>
+    <select id="getAllPrivilege" resultType="com.example.lastHomeWork.entity.Privilege_Info">
+        select privilege_id,privilege_name from privilege_info
+    </select>
+    <update id="ManagerUpdateFoodByFood_id" parameterType="com.example.lastHomeWork.entity.Food_Info">
+        update food
+        set food_name = #{food_name},price = #{price},food_number = #{food_number}
+        where food_id = #{food_id}
+    </update>
+    <update id="updateShop_information" parameterType="com.example.lastHomeWork.entity.Shop_Info">
+        update shop
+        set shop_name = #{shop_name},location = #{location}
+        where shop_id = #{shop_id}
+    </update>
+    <update id="updateManager_privilege" parameterType="com.example.lastHomeWork.entity.Manager">
+        update manager
+        set manager_privilege = #{manager_privilege}
+        where manager_id = #{manager_id}
+    </update>
+    <insert id="InsertFood" parameterType="com.example.lastHomeWork.entity.Food_Info">
+        insert into food(food_name,price,food_number,shop_id)
+        values (#{food_name},#{price},#{food_number},#{shop_id})
+    </insert>
+    <insert id="InsertManager" parameterType="com.example.lastHomeWork.entity.Manager">
+        insert into manager(manager_name,manager_password,manager_privilege)
+        values (#{manager_name},#{manager_password},#{manager_privilege})
+    </insert>
+    <delete id="deleteOneFood" parameterType="com.example.lastHomeWork.entity.Food_Info">
+        delete  from food
+        where food_id = #{food_id}
+    </delete>
+    <delete id="deleteManager" parameterType="com.example.lastHomeWork.entity.Manager">
+        delete from manager
+        where manager_id = #{manager_id}
+    </delete>
+
+</mapper>

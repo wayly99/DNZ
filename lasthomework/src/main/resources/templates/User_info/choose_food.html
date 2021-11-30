@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:itemStat="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>选择食物</title>
+<style>
+    body{
+    background-color: #f4f5f6;
+    }
+    a:link {
+    text-decoration: none;
+    color: #000000;
+    }
+
+    a:visited {
+    text-decoration: none;
+    color: #000000;
+    }
+
+    a:active {
+    text-decoration: none;
+    color: #000000;
+    }
+
+    a:hover {
+    text-decoration: none;
+    color: #000000;
+    }
+    .bg {
+    height: 80%;
+    padding-bottom: 5%;
+    align-self: center;
+    }
+    .head{
+    text-align: center;
+    padding-bottom: 5%;
+    }
+    .name{
+    text-align: center;
+    font-size:30px;
+    }
+    .vip{
+        text-align: center;
+        color: cornflowerblue;
+        font-size:30px;
+    }
+    .invest{
+        width: 100px;
+        height: 40px;
+        font-family: "微软雅黑 Light";
+        font-size: 25px;
+        text-align: center;
+        background-color: cornflowerblue;
+        font-weight: bold;
+        border-radius: 20%;
+    }
+    .headFront{
+    text-align: center;
+    color: cornflowerblue;
+    font-size:20px;
+    }
+    .list1{
+    width: 150px;
+    font-size: 20px;
+    height: 50px;
+    font-family: "微软雅黑 Light";
+    padding-bottom: 5%;
+    }
+    .list2{
+    width: 150px;
+    font-size: 15px;
+    height: 50px;
+    font-family: "微软雅黑 Light";
+    padding-bottom: 5%;
+    }
+
+    .list4{
+        width: 20px;
+        height: 50px;
+        padding-bottom: 5%;
+    }
+    .tableDiv{
+        width: 800px;
+        height: 600px;
+        background-color:#FFFFFF;
+    }
+    .addImg{
+    width: 25px;
+    height:25px;
+    }
+    .buy_button{
+        width: 90px;
+        height: 30px;
+        border-radius: 20%;
+        background-color: cornflowerblue;
+        font-family: "微软雅黑 Light";
+        font-size: 20px;
+        font-weight: bold ;
+    }
+</style>
+</head>
+<body>
+<div class="bg">
+    <div class="head">
+        <div class="name">欢迎回来，<label  th:text="${user_info.user_name}"></label></div>
+        <div class="vip"><label th:text="'VipID:'+${user_info.vipID}"></label></div>
+        <div class="headFront">
+            <label th:text="'余额:'+${vip_info.account}"></label>
+            <label th:text="'积分:'+${vip_info.integral}"></label>
+        </div>
+        <center><a th:href="@{show_invest(vip_id=${vip_info.vipID})}"><div class="invest">充值</div></a></center>
+    </div>
+
+    <center>
+        <div class="tableDiv">
+            <div style="height: 40px"></div>
+            <a th:href="@{User_login(user_id = ${user_info.user_id},user_pwd = ${user_info.password})}">
+                <button style="float: left">返回</button></a>
+    <table>
+        <tr>
+            <th>
+                <div class="list1">食物名</div>
+            </th>
+            <th>
+                <div class="list1">食物剩余数量</div>
+            </th>
+            <th colspan="4">
+                <div class="list1">价格</div>
+            </th>
+        </tr>
+        <div th:each="item, itemStat: ${food_infoList}">
+            <tr>
+                    <th>
+                        <div class="list2" th:text="${item.food_name}"></div>
+                    </th>
+                    <th>
+                        <div class="list2" th:text="${item.food_number}"></div>
+                    </th>
+                    <th>
+                        <div class="list2" th:text="${item.price}"></div>
+                    </th>
+                    <th>
+                        <div class="list4">
+                            <a th:href="@{decreaseFoodInChoose_food(food_id = ${item.food_id},
+                             shop_id = ${shop_id},start_page = ${start_page})}">
+                                <img src="http://127.0.0.1:8080/decrease.png" class="addImg"></a>
+
+                        </div>
+                    </th>
+                    <th>
+                        <div th:text="${item.buy_number}" class="list4"></div>
+                    </th>
+                    <th>
+                        <div class="list4">
+                            <a th:href="@{AddFood(food_id = ${item.food_id},
+                             shop_id = ${shop_id},start_page = ${start_page})}">
+                            <img src="http://127.0.0.1:8080/addLable.png" class="addImg"></a>
+                        </div>
+                    </th>
+            </tr>
+        </div>
+    </table>
+            <a th:href="@{showFood(shop_id=${shop_id},start_page=${start_page - 5})}"><input type="button" value="上一页"></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a th:href="@{showFood(shop_id=${shop_id},start_page=${start_page + 5})}"><input type="button" value="下一页"></a>
+            <div style="height: 40px"></div>
+
+            <a th:href="@{buy_food(shop_id=${shop_id},start_page = ${start_page})}"><div class="buy_button">购买</div></a>
+        </div>
+    </center>
+</div>
+</body>
+</html>

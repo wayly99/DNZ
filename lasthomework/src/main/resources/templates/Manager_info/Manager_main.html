@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:itemStat="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>管理页面</title>
+    <style>
+        body{
+            background-color: #f4f5f6;
+        }
+        a:link {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:active {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #000000;
+        }
+        .tableDiv{
+            width: 800px;
+            height: 600px;
+            background-color:#FFFFFF;
+            border-radius: 10%;
+        }
+        .list{
+            width: 200px;
+            font-size: 25px;
+            height: 50px;
+            font-family: "微软雅黑 Light";
+            font-weight: bold;
+
+            background-color: cornflowerblue;
+            border-radius: 20%;
+            text-align: center;
+        }
+        .manager{
+            font-size: 30px;
+            font-family: "微软雅黑 Light";
+            font-weight: bold;
+        }
+        .manager1{
+            font-size: 25px;
+            font-family: "微软雅黑 Light";
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div style="height: 40px;"></div>
+<center>
+    <div class="tableDiv">
+        <div style="height: 20px"></div>
+        <div class="manager" th:text="'欢迎登陆:'+${manager.manager_name}"></div>
+        <p></p>
+        <div class="manager1">请选择你需要行驶的权限</div>
+        <div  th:each="item, itemStat: ${privilege_infoList}">
+         <div style="height: 30px"></div>
+            <a th:href="${item.privilege_request}">
+              <div class="list" th:text="${item.privilege_name}"></div>
+                <div style="height: 20px"></div>
+            </a>
+        </div>
+    </div>
+</center>
+</body>
+</html>

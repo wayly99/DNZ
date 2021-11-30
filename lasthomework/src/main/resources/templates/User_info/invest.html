@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:itemStat="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>充值</title>
+    <style>
+        body{
+            background-color: #f4f5f6;
+        }
+        .tableDiv{
+            width: 800px;
+            height: 600px;
+            background-color:#FFFFFF;
+            border-radius: 15%;
+        }
+        .list{
+            height: 40px;
+        }
+        .list1{
+            height: 60px;
+        }
+        .list2{
+            font-family: "微软雅黑 Light";
+            font-size: 15px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div style="height: 40px"></div>
+    <center>
+    <div class="tableDiv">
+        <div style="height: 40px"></div>
+        <form action="invest" method="get">
+            <div class="list1"><h1>用户充值</h1></div>
+            <div><input type="text" th:value="${vip_id}" name="vip_id"></div>
+            <div class="list2">（可为其他用户充值）</div>
+            <div class="list"><input type="text" placeholder="充值金额" name="accounts"></div>
+            <div class="list"><input type="submit" value="充值"></div>
+        </form>
+    </div>
+    </center>
+</body>
+</html>

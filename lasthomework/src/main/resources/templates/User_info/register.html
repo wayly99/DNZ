@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <style>
+        body{
+            background-color: #f4f5f6;
+        }
+        a:link {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:active {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #000000;
+        }
+        .bg {
+            padding-top: 5%;
+            width: 500px;
+            height: 200px;
+            padding-bottom: 5%;
+            align-self: center;
+            background-color: #FFFFFF;
+            border-radius: 25%;
+        }
+
+        .head {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 17px;
+        }
+        .head  {
+            height: 200px;
+        }
+        .loginButton{
+            border-radius: 25%;
+            width:50px
+        }
+        .button{
+            height: 30px;
+            width:150px
+        }
+        .foot{
+            height: 20px;
+        }
+        .foot p{
+            size: 10px;
+            color: cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+<div class="head"></div>
+<center>
+<div class="bg">
+        <div>
+            <h3>用户注册</h3>
+            <form action="register" method="get">
+                <!--电话号码-->
+                <div>
+                    <input type="text"  placeholder="用户名" id="id" maxlength="50" name="id">
+                    <p  id="idMsg"></p>
+                </div>
+                <div>
+                    <input type="text"  placeholder="用户名" id="name" maxlength="50" name="name">
+                    <p  id="nameMsg"></p>
+                </div>
+                <!--密码-->
+                <div>
+                    <input type="password"  placeholder="密码" id="pwd" maxlength="20" name="pwd">
+                    <p class="" id="pwdMsg"></p>
+                </div>
+                <!--按钮不可点击 加上class：disable -->
+                <div class="button">
+                    <input type="submit" class="loginButton" value="注册">
+                </div>
+            </form>
+            <div class="foot">
+                <p>登录即表示同意平台《隐私政策》和《用户协议》</p>
+            </div>
+        </div>
+
+</div>
+</center>
+</body>
+</html>

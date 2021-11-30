@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:itemStat="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>添加管理员</title>
+    <style>
+        body{
+            background-color: #f4f5f6;
+        }
+        .tableDiv{
+            width: 800px;
+            height: 600px;
+            background-color:#FFFFFF;
+            border-radius: 15%;
+        }
+        .list{
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+<div style="height: 40px"></div>
+<center>
+    <div class="tableDiv">
+        <div style="height: 40px"></div>
+            <div style="height: 30px"></div>
+            <a th:href="@{Manager_login(manager_id = ${manager.manager_id},manager_pwd = ${manager.manager_password})}"><button>返回主菜单</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a th:href="@{show_editManager}"><button>查看管理员</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a th:href="@{show_addManager}"><button>添加管理员</button></a>
+        <form action="add_Manager" method="get">
+            <h2>添加管理员</h2>
+            <div class="list"><input type="text" placeholder="管理员名字" name="manager_name"></div>
+
+            <div class="list"><input type="text" placeholder="管理员登陆密码" name="manager_password"></div>
+
+            <h3>选择该管理员所拥有的权限</h3>
+            <div class="list" th:each="item, itemStat: ${privilege_infoList}">
+                <input type="checkbox" name="manager_privilege" th:text="${item.privilege_name}" th:value="${item.privilege_id}">
+            </div>
+
+            <input type="submit" value="提交">
+        </form>
+    </div>
+</center>
+</body>
+</html>
